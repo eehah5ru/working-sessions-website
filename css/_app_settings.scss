@@ -1,0 +1,29 @@
+@import "util/util";
+
+$font-family-sans-serif: "AsimovXWid", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+$font-family-sans: "Asimov", "PTSansWebRegular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+
+$white       : #FFFFFF;
+$jet         : #222222;
+$not-jet: #444444;
+
+$blue: #6388F6;
+$green: #9AF663;
+// $red: #F67B7B;
+$red: #F45B5B;
+
+
+$primary-color: $jet;
+$body-bg: $white;
+$body-font-color: $not-jet;
+$body-font-family: $font-family-sans;
+$header-font-family: $font-family-sans-serif;
+$paragraph-font-size: 1.2rem;
+$paragraph-line-height: 1.5;
+
+$button-function-factor: -20;
+$button-bg-color: $primary-color;
+$button-bg-hover: scale-color($button-bg-color, $lightness: $button-function-factor);
+
+$topbar-bg-color: darken($body-bg, 10%);
+$topbar-height: rem-calc(30);

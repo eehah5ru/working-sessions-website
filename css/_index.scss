@@ -1,0 +1,81 @@
+.index {
+  position: relative;
+
+  height: 100%;
+  min-height: 100%;
+
+  background-color: $primary-color;
+
+
+  .title {
+    @include vertical-center;
+    width: 100%;
+    min-width: 100%;
+
+  }
+
+  h1 {
+    color: $white;
+
+    &.work-hard {
+      text-align: left;
+      font-size: 7vw;
+      text-shadow: $blue -1vw -1vw;
+    }
+
+    &.play-hard {
+      text-align: right;
+      font-size: 7vw;
+      text-shadow: $green -1vw -1vw;
+
+      @include breakpoint(medium) {
+        font-size: 8vw;
+      }
+    }
+
+  }
+
+  h2.place {
+    @include horizontal-center;
+    bottom: 0 !important;
+    // padding-bottom: 27vw;
+    font-size: 3vw;
+    // text-shadow: $white -0.5vw -0.5vw;
+    color: $red;
+  }
+}
+
+
+// .index .title {
+//   @include absolute-center;
+//   font-size: 5vw;
+
+//   text-align: center;
+// }
+
+// .index .address {
+//   font-size: 4vw;
+//   // @include absolute-center;
+//   // padding-top: 18vw;
+// }
+
+// section.contact-email {
+//   position: absolute;
+//   bottom: 0;
+//   right: 0;
+//   // margin-right: rem-calc(20px);
+//   z-index: 99;
+
+//   a {
+//     text-transform: none;
+//   //   color: blue;
+
+//   //   &:hover {
+//   //     color: pink;
+//   //   }
+
+//   //   @include breakpoint(medium) {
+//   //     color: black;
+//   //   }
+//   }
+// }

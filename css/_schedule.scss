@@ -1,0 +1,191 @@
+section.schedule {
+  // color: red;
+
+  header,
+  article {
+    @extend .row;
+    @extend .expanded;
+  }
+
+  a {
+    font-size: inherit;
+    color: inherit;
+    text-transform: inherit;
+    letter-spacing: inherit;
+    text-decoration: underline;
+
+    &:hover {
+      color: $blue;
+      text-shadow: $red -2px -2px;
+    }
+  }
+
+  > header {
+    text-align: center;
+    background-color: $blue;
+    position: relative;
+    height: 30vw;
+    min-height: 30vw;
+    z-index: 0;
+
+    h1 {
+      @include absolute-center
+      font-size: 10vw;
+    }
+  }
+
+  .menu {
+    @include absolute-center;
+
+    @extend .show-for-medium;
+
+    padding-top: 15vw;
+
+    &.second-line {
+      padding-top: 25vw;
+      z-index: -1;
+    }
+
+    li a {
+      color: $white;
+
+      &:hover {
+        color: $green;
+      }
+    }
+
+  }
+
+  section.day {
+    &.whole-week {
+      > header {
+        height: auto;
+
+        h3.date {
+          font-size: 12vw;
+        }
+
+        h3.name-of-day {
+          @include breakpoint(small only) {
+            font-size: 5vw;
+          }
+        }
+      }
+    }
+
+    &.important {
+      > header {
+        height: auto;
+
+        h3.date {
+          font-size: 18vw;
+        }
+      }
+    }
+
+    > header {
+      @extend .row;
+
+      position: relative;
+      height: 28vw;
+      padding-top: 2vw;
+      padding-bottom: 2vw;
+      background-color: $green;
+
+      h3 {
+        @extend .column;
+        @extend .small-12;
+
+      }
+
+      h3.name-of-day {
+        line-height: 0.8;
+        position: absolute;
+        top: 4vw;
+        left: 0;
+
+
+        font-size: 9vw;
+        text-shadow: -0.8vw -0.8vw $white;
+
+        @include breakpoint(medium) {
+          text-shadow: -0.3vw -0.3vw $white;
+          font-size: 3.5vw;
+        }
+      }
+
+      h3.date {
+        font-size: 25vw;
+        // text-shadow: -1vw -1vw $white;
+        text-align: left;
+        line-height: 1;
+      }
+
+    }
+
+
+    article {
+      @extend .row;
+      // @extend .collapse;
+
+      position: relative;
+      min-height: 24vw;
+
+      &.long {
+        min-height: 48vw;
+      }
+
+      &:first-of-type {
+        margin-top: 2rem;
+      }
+
+      p {
+        @extend .column;
+
+        text-shadow: $white -2px -2px;
+
+        &:last-of-type {
+          @extend .end;
+        }
+      }
+
+      .time {
+        @extend .small-12;
+
+        z-index: -1;
+        font-size: 30vw;
+        line-height: 0.8;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        &.long {
+          font-size: 15vw;
+        }
+      }
+
+      .name {
+        @extend .small-12;
+
+        font-size: 8vw;
+
+        @include breakpoint(medium) {
+          font-size: 4vw;
+        }
+
+      }
+
+
+      .descr {
+        @extend .small-12;
+        @extend .large-6;
+      }
+
+      .long-descr {
+        @extend .small-12;
+        @extend .medium-6;
+        @extend .medium-offset-6;
+      }
+    }
+  }
+}

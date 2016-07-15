@@ -1,0 +1,230 @@
+@charset 'utf-8';
+
+@import "app_settings";
+@import "foundation";
+
+
+@include foundation-global-styles;
+@include foundation-grid;
+@include foundation-typography;
+@include foundation-button;
+@include foundation-forms;
+@include foundation-visibility-classes;
+@include foundation-float-classes;
+@include foundation-dropdown;
+@include foundation-dropdown-menu;
+@include foundation-menu;
+@include foundation-sticky;
+@include foundation-top-bar;
+@include foundation-orbit;
+@include foundation-flex-video;
+
+
+@import "index";
+
+@import "schedule";
+
+
+/* @import "slick"; */
+/* @import "slick-theme"; */
+
+// Or selectively include components
+/* @import */
+/* //   "foundation/components/accordion", */
+/* //   "foundation/components/alert-boxes", */
+/* //   "foundation/components/block-grid", */
+/* //   "foundation/components/breadcrumbs", */
+/* //   "foundation/components/button-groups", */
+/*   "components/button", */
+/* //   "foundation/components/clearing", */
+/* //   "foundation/components/dropdown", */
+/* //   "foundation/components/dropdown-buttons", */
+/* //   "foundation/components/flex-video", */
+/* //   "foundation/components/forms", */
+/*   "grid/grid", */
+/* //   "foundation/components/inline-lists", */
+/* //   "foundation/components/joyride", */
+/* //   "foundation/components/keystrokes", */
+/* //   "foundation/components/labels", */
+/* //   "foundation/components/magellan", */
+/* //   "foundation/components/orbit", */
+/* //   "foundation/components/pagination", */
+/* //   "foundation/components/panels", */
+/* //   "foundation/components/pricing-tables", */
+/* //   "foundation/components/progress-bars", */
+/* //   "foundation/components/reveal", */
+/* //   "foundation/components/side-nav", */
+/* //   "foundation/components/split-buttons", */
+/* //   "foundation/components/sub-nav", */
+/* //   "foundation/components/switches", */
+/* //   "foundation/components/tables", */
+/* //   "foundation/components/tabs", */
+/* //   "foundation/components/thumbs", */
+/* //   "foundation/components/tooltips", */
+/*   "components/top-bar"; */
+/* //   "foundation/components/type", */
+/* //   "foundation/components/offcanvas", */
+/* //   "foundation/components/visibility"; */
+
+@font-face {
+  font-family: "AsimovXWid";
+  src: url("../fonts/AsimovXWid.otf");
+  /* src: local("☺"), */
+  /*   url("type/filename.woff") format("woff"), */
+  /*   url("type/filename.otf") format("opentype"), */
+  /*   url("type/filename.svg#filename") format("svg"); */
+}
+
+@font-face {
+  font-family: "Asimov";
+  src: url("../fonts/Asimov.otf");
+  /* src: local("☺"), */
+  /*   url("type/filename.woff") format("woff"), */
+  /*   url("type/filename.otf") format("opentype"), */
+  /*   url("type/filename.svg#filename") format("svg"); */
+}
+
+
+
+@font-face {
+  font-family: "OpenSansRegular";
+  src: url("../fonts/OpenSans-Regular.ttf");
+  /* src: local("☺"), */
+  /*   url("type/filename.woff") format("woff"), */
+  /*   url("type/filename.otf") format("opentype"), */
+  /*   url("type/filename.svg#filename") format("svg"); */
+}
+
+@font-face {
+  font-family: "PTSansWebRegular";
+  src: url("../fonts/PT_Sans-Web-Regular.ttf");
+  /* src: local("☺"), */
+  /*   url("type/filename.woff") format("woff"), */
+  /*   url("type/filename.otf") format("opentype"), */
+  /*   url("type/filename.svg#filename") format("svg"); */
+}
+
+
+/*
+ *
+ * aligns
+ *
+ */
+@mixin vertical-align-center($position: relative) {
+  position: $position;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+/* @mixin align-center($position: realtive) { */
+/*     position: $position; */
+/*     top: 50%; */
+/*     -webkit-transform: translateY(-50%); */
+/*     -ms-transform: translateY(-50%); */
+/*     transform: translateY(-50%);   */
+/* } */
+
+
+@media only screen and (min-width : 320px) and (max-width : 560px) {
+  body {
+    -webkit-text-size-adjust: none;
+  }
+}
+
+html, body {
+  height: 100%;
+  min-height: 100%;
+}
+
+body {
+  width: 100%;
+  letter-spacing: rem-calc(0.8px);
+}
+
+
+
+section {
+  overflow: hidden;
+
+  margin-left: 0px !important;
+
+  margin-top: rem-calc(50px);
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+}
+
+/* .slick-prev::before, */
+/* .slick-next::before { */
+/*   color: $body-font-color; */
+/* } */
+
+h1 {
+  text-transform: uppercase;
+  letter-spacing: rem-calc(2px);
+}
+
+
+a {
+  text-transform: uppercase;
+  letter-spacing: rem-calc(3px);
+  &:hover {
+    color: magenta;
+  }
+}
+
+// .project {
+//   postion: relative;
+// }
+
+// .lang-switch {
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+// }
+
+/* .video-wrapper { */
+/*   position: relative; */
+/*   padding-bottom: 56.25%; /\* 16:9 *\/ */
+/*   padding-top: rem-calc(25px); */
+/*   height: 0; */
+/* } */
+/* .video-wrapper iframe { */
+/*   position: absolute; */
+/*   top: 0; */
+/*   left: 0; */
+/*   width: 100%; */
+/*   height: 100%; */
+/* } */
+
+/* .parallax-base { */
+/*     position: absolute; */
+/*     top: 0; */
+/*     bottom: 0; */
+/*     left: 0; */
+/*     right: 0; */
+/*     z-index: 0; */
+/* } */
+
+/* .vertical-title-wrapper { */
+/*     /\* position: absolute; *\/ */
+/*     /\* top: 0; *\/ */
+/*     /\* left: 0; *\/ */
+/*     @include absolute-center; */
+/* } */
+
+/* .vertical-title { */
+
+/* } */
+
+/* .vertical-text { */
+/*  transform: rotate(90deg); */
+/*  transform-origin: left bottom 0; */
+/* } */
+
+/* .dmytro-bg { */
+/*     background-image: url("../images/seminar-1/dima-parallax-bg.png") */
+/* } */
