@@ -1,0 +1,22 @@
+{
+  "name": "dkds.space",
+  "authors": [
+    "Nicola Spesivtsev <nicola.spesivcev@gmail.com>"
+  ],
+  "description": "dkds.space simple website",
+  "main": "",
+  "moduleType": [],
+  "keywords": [
+    "website",
+    "dkds.space"
+  ],
+  "license": "MIT",
+  "homepage": "http://dkds.space",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
