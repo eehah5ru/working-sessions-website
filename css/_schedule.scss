@@ -1,6 +1,8 @@
 section.schedule {
   // color: red;
 
+  margin-top: 0;
+
   header,
   article {
     @extend .row;

@@ -1,0 +1,23 @@
+section.description {
+  background-color: $green;
+  @extend .row;
+  p, h3 {
+    @extend .column;
+    @extend .small-12;
+    @extend .medium-8;
+    @extend .medium-offset-2;
+    @extend .end;
+
+    text-shadow: $white -1px -1px;
+
+
+
+    &:first-of-type {
+      margin-top: 2rem;
+    }
+
+    &:last-of-type {
+      margin-bottom: 2rem;
+    }
+  }
+}

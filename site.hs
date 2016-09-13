@@ -56,6 +56,7 @@ main =
      -- index page
      --
      indexPageRules
+     indexEnPageRules
 
      --
      -- templates
@@ -152,14 +153,18 @@ jsRules =
 --             loadAndApplyTemplate "templates/default.html" indexCtx >>=
 --             relativizeUrls
 
-indexPageRules =
-  match (fromList ["index.html"]) $
+indexPageRules = doIndexPageRules "index.html" "templates/index.html"
+indexEnPageRules = doIndexPageRules "en/index.html" "templates/index-en.html"
+
+doIndexPageRules indexPage indexTemplate =
+  match (fromList [indexPage]) $
   do route $ setExtension "html"
      compile $
        pandocCompiler >>=
-       loadAndApplyTemplate "templates/index.html" indexCtx >>=
+       loadAndApplyTemplate indexTemplate indexCtx >>=
        loadAndApplyTemplate "templates/default.html" indexCtx >>=
        relativizeUrls
+
 
 -- projectsRules =
 --   do match "projects/*.md" $

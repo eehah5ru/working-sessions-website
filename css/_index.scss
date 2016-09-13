@@ -6,6 +6,30 @@
 
   background-color: $primary-color;
 
+  .lang-switch {
+    transform: translate(2.5vw) rotate(90deg);
+    display: block;
+    font-size: 12vw;
+    line-height: 1;
+    padding-left: 6vw;
+    color: $not-jet;
+    // text-decoration: underline;
+    top: 0;
+    right: 0;
+    position: absolute;
+    z-index: 99;
+
+    @include breakpoint(440) {
+      font-size: 5vw;
+    }
+
+
+    &:hover {
+      color: $red;
+      text-shadow: $blue -4px -4px;
+    }
+  }
+
 
   .title {
     @include vertical-center;
@@ -39,9 +63,13 @@
     @include horizontal-center;
     bottom: 0 !important;
     // padding-bottom: 27vw;
-    font-size: 3vw;
+    font-size: 6vw;
     // text-shadow: $white -0.5vw -0.5vw;
     color: $red;
+
+    @include breakpoint(440) {
+      font-size: 3vw;
+    }
   }
 }
 
