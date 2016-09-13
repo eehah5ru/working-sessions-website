@@ -1,6 +1,7 @@
 section.description {
   background-color: $green;
   @extend .row;
+  @extend .expanded;
   p, h3 {
     @extend .column;
     @extend .small-12;
