@@ -81,6 +81,10 @@ section.schedule {
 
         h3.date {
           font-size: 18vw;
+
+          &.en {
+            font-size: 15vw;
+          }
         }
       }
     }
