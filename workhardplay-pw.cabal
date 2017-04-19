@@ -9,6 +9,9 @@ executable site
                   , hakyll == 4.8.*
                   , hakyll-sass == 0.2.*
                   , data-default
-                  , hsass
+                  , hsass == 0.4.1
+                  , aeson
+                  , bytestring
+                  , string-conversions
   ghc-options:      -threaded
   default-language: Haskell2010
