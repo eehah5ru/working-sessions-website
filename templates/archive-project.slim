@@ -1,0 +1,18 @@
+include ru/shared/_menu.slim
+include ru/shared/_lang_switch.slim
+
+header.archive-project.whp-2017
+  .title
+    h1
+      a href="/ru/2016/"
+        | 2016
+      | &nbsp;->&nbsp;
+      a href="/ru/2016/archive.html"
+        | Архив
+    h1
+      | $author$
+    h1
+      | $project_title$
+
+article.archive-project.whp-2017
+  | $body$

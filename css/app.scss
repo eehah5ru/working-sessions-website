@@ -3,7 +3,7 @@
 @import "app_settings";
 @import "foundation";
 
-
+@include foundation-media-object;
 @include foundation-global-styles;
 @include foundation-grid;
 @include foundation-typography;
@@ -20,11 +20,21 @@
 @include foundation-flex-video;
 
 
+@import "components-2017";
+//
+// 2016
+//
 @import "index";
-
 @import "schedule";
-
 @import "description";
+
+
+//
+// 2017
+//
+@import "prelude-2017";
+@import "index_2017";
+@import "archive-2017";
 
 /* @import "slick"; */
 /* @import "slick-theme"; */
@@ -66,6 +76,15 @@
 /* //   "foundation/components/type", */
 /* //   "foundation/components/offcanvas", */
 /* //   "foundation/components/visibility"; */
+
+@font-face {
+  font-family: "Input";
+  src: url("../fonts/InputSans-Regular.ttf");
+  /* src: local("☺"), */
+  /*   url("type/filename.woff") format("woff"), */
+  /*   url("type/filename.otf") format("opentype"), */
+  /*   url("type/filename.svg#filename") format("svg"); */
+}
 
 @font-face {
   font-family: "AsimovXWid";

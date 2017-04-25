@@ -1,0 +1,33 @@
+body {
+  overflow: scroll;
+
+  &.disabled-scroll {
+    overflow: hidden;
+  }
+
+  // color: darken(blue, 10%);
+}
+
+nav#menu-sign.whp-2017 {
+  @include menu-sign;
+}
+
+nav#menu.whp-2017 {
+  @include menu;
+}
+
+header.index-page.whp-2017 {
+  @include lang-switch;
+  @include whp-2017-header;
+}
+
+section.whp-2017.index-page.description {
+  @extend .row;
+
+  p {
+    @extend .small-12;
+    @extend .large-6;
+    @extend .large-offset-3;
+    @extend .end;
+  }
+}
