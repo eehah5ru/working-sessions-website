@@ -1,15 +1,22 @@
---------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
 
-import Data.Monoid (mappend, (<>))
-import Control.Monad ((>=>))
-import Hakyll
-import Hakyll.Web.Sass (sassCompilerWith)
-import Hakyll.Core.Configuration (Configuration, previewPort)
-import Data.Default (def)
+import           Control.Monad ((>=>))
+-- import           Data.ByteString.Lazy as BSL
+import           Data.Default (def)
+-- import           Data.Monoid (mappend, (<>))
+import           Hakyll
+-- import           Hakyll.Core.Configuration (Configuration, previewPort)
+-- import           Hakyll.Core.Metadata
+import           Hakyll.Web.Sass (sassCompilerWith)
+import Hakyll.Core.Compiler (getUnderlying)
+import Hakyll.Web.Template.Internal (readTemplate)
 import qualified Text.Sass.Options as SO
 
+import Site.Types
+import Site.SlimPage
+import Site.MultiLang
 --------------------------------------------------------------------------------
+
 config :: Configuration
 config = def { previewPort = 8001
              , previewHost = "0.0.0.0" }
@@ -39,7 +46,11 @@ main =
      --
      -- static pages
      --
-     -- staticPagesRules
+     staticPagesRules
+
+     archiveIndexPageRules
+
+     archivePagesRules
 
      --
      -- projects and posts
@@ -55,8 +66,8 @@ main =
      --
      -- index page
      --
-     indexPageRules
-     indexEnPageRules
+     -- indexPageRules
+     -- indexEnPageRules
 
      --
      -- templates
@@ -107,15 +118,6 @@ jsRules =
            do route idRoute
               compile copyFileCompiler
 
-
--- staticPagesRules =
---   match (fromList ["about.rst","contact.markdown"]) $
---   do route $ setExtension "html"
---      compile $
---        pandocCompiler >>=
---        loadAndApplyTemplate "templates/default.html" defaultContext >>=
---        relativizeUrls
-
 -- postsRules =
 --   match "posts/*" $
 --   do route $ setExtension "html"
@@ -153,18 +155,88 @@ jsRules =
 --             loadAndApplyTemplate "templates/default.html" indexCtx >>=
 --             relativizeUrls
 
-indexPageRules = doIndexPageRules "index.html" "templates/index.html"
-indexEnPageRules = doIndexPageRules "en/index.html" "templates/index-en.html"
+--
+-- templates
+--
+ruIndexTemplate = "templates/default.slim"
+enIndexTemplate = "templates/default.html"
 
-doIndexPageRules indexPage indexTemplate =
-  match (fromList [indexPage]) $
-  do route $ setExtension "html"
-     compile $
-       pandocCompiler >>=
-       loadAndApplyTemplate indexTemplate indexCtx >>=
-       loadAndApplyTemplate "templates/default.html" indexCtx >>=
-       relativizeUrls
+defaultTemplate = "templates/default.html"
 
+-- ruIndexPageRules = doIndexPageRules "index.html" ruIndexTemplate
+-- enIndexPageRules = doIndexPageRules "en/index.html" enIndexTemplate
+
+staticPagesRules =
+  do
+    -- 2017
+    indexPage "2017/index.slim"
+    indexPage "2017/invitation.slim"
+
+    -- 2016
+    indexPage "2016/index.slim"
+    -- indexPage "2016/archive.slim"
+  where
+    indexPage = matchMultiLang ruRules enRules
+    ruRules = slimPageRules $ loadAndApplyTemplate "templates/default.slim" defaultContext
+    enRules = slimPageRules $ loadAndApplyTemplate enIndexTemplate defaultContext
+
+    -- readSlimTemplate :: Identifier -> Compiler (Template)
+    -- readSlimTemplate p =
+    --   loadBody p >>= compileSlimWithEmptyLocals >>= return . readTemplate
+
+    -- applyRuTemplate x = do
+    --   tpl <- readSlimTemplate "templates/default.slim"
+    --   applyTemplate tpl defaultContext x
+
+archivePagesRules =
+  do
+    rules "2016/archive/*.slim"
+  where rules = matchMultiLang ruRules enRules
+        ruRules = slimPageRules $ \x ->
+                    return x
+                    >>= applyAsTemplate defaultContext
+                    >>= loadAndApplyTemplate "templates/archive-project.slim" defaultContext
+                    >>= loadAndApplyTemplate ruIndexTemplate defaultContext
+        enRules = ruRules
+
+archiveIndexPageRules =
+  matchMultiLang ruRules enRules "2016/archive.slim"
+  where ruRules = slimPageRules $ \x ->
+                    do pTpl <- loadBody "templates/archive-item.slim"
+                       projects <- loadAll "ru/2016/archive/*.slim"
+                       s <- applyTemplateList pTpl defaultContext projects
+                       let archiveCtx = constField "projects" s `mappend`
+                                        defaultContext
+                       applyAsTemplate archiveCtx x
+                         >>= loadAndApplyTemplate "templates/default.slim" archiveCtx
+        enRules = slimPageRules $
+                    loadAndApplyTemplate enIndexTemplate defaultContext
+
+-- doIndexPageRules indexPage indexTemplate =
+--   match (fromList [indexPage]) $
+--   do route $ setExtension "html"
+--      compile $
+--        pandocCompiler >>=
+--        loadAndApplyTemplate indexTemplate indexCtx >>=
+--        loadAndApplyTemplate "templates/default.html" indexCtx >>=
+--        relativizeUrls
+
+-- doStaticPageRules (page, template) =
+--   match (fromList [page]) $
+--         do m <- getMetadata page
+--            route $ setExtension "html"
+--            compile $ (slimCompiler m)
+--              >>= loadAndApplyTemplate template defaultContext
+--              >>= loadAndApplyTemplate defaultTemplate defaultContext
+--              >>= relativizeUrls
+
+-- staticPagesRules =
+--   match (fromList ["about.rst","contact.markdown"]) $
+--   do route $ setExtension "html"
+--      compile $
+--        pandocCompiler >>=
+--        loadAndApplyTemplate "templates/default.html" defaultContext >>=
+--        relativizeUrls
 
 -- projectsRules =
 --   do match "projects/*.md" $
@@ -182,7 +254,12 @@ doIndexPageRules indexPage indexTemplate =
 --                 >>= relativizeUrls
 
 templatesRules =
-  match "templates/*" $ compile templateCompiler
+  do
+    match "templates/*.html" $ compile templateCompiler
+    match ("templates/*.slim" .&&. (complement "templates/_*.slim")) $ do
+      slimDeps <- makePatternDependency "templates/_*.slim"
+      rulesExtraDependencies [slimDeps] $ compile $
+        getResourceString >>= withItemBody compileSlimWithEmptyLocals >>= withItemBody (return . readTemplate)
 
 
 -- compilers
@@ -193,9 +270,8 @@ coffee = getResourceString >>= withItemBody processCoffee
     processCoffee = unixFilter "coffee" ["-c", "-s"] >=>
                     unixFilter "yuicompressor" ["--type", "js"]
 
-slimCompiler :: Compiler (Item String)
-slimCompiler = getResourceString >>= withItemBody processSlim
-  where processSlim = unixFilter "slimrb" ["-s", "-p"]
+
+
 
 --
 --
@@ -211,7 +287,7 @@ slimCompiler = getResourceString >>= withItemBody processSlim
 
 -- indexCtx = projectsListCtx `mappend` defaultContext
 
-indexCtx = defaultContext
+-- indexCtx = defaultContext
 
 -- projectsInfo = [ ("Paranoiapp", "https://paranoiapp.net")
 --                ,("OBJ", "http://ooooobj.org")
