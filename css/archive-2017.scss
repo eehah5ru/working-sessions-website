@@ -1,21 +1,52 @@
 header.archive-page.whp-2017 {
   @include whp-2017-header;
   @include whp-2017-gradient-background;
-  // @extend .row;
-  // @extend .expanded;
 
-  // h1 {
-  //   @extend .small-12;
-  //   @extend .columns;
-  // }
+  overflow: hidden;
+
+  .projects-list {
+    -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+    list-style-type: none;
+    margin-left: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120%;
+
+    a {
+      color: lighten(grey, 20%);
+
+      &:hover {
+        color: $primary-color-2017;
+        text-decoration: underline;
+      }
+    }
+
+    li {
+      display: inline-block;
+    }
+  }
 }
 
 header.archive-project.whp-2017 {
   @include whp-2017-header;
+
+  .header-cover {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    min-width: 100%;
+    height: 100%;
+    -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+
+  }
 }
 
 article.archive-page.whp-2017 {
   max-width: 100%;
+
+  margin-top: 2rem;
 
   > ul {
     @extend .row;
