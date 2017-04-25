@@ -1,5 +1,6 @@
 header.archive-page.whp-2017 {
   @include whp-2017-header;
+  @include whp-2017-gradient-background;
   // @extend .row;
   // @extend .expanded;
 
@@ -96,6 +97,12 @@ article.archive-project.whp-2017 {
     @extend .large-6;
     @extend .large-offset-3;
     @extend .end;
+
+    margin-top: 1rem;
+
+    &:first-of-type {
+      margin-top: 2rem;
+    }
 
     img.full-width {
       width: 100%;

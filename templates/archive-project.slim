@@ -1,7 +1,13 @@
 include ru/shared/_menu.slim
 include ru/shared/_lang_switch.slim
 
-header.archive-project.whp-2017
+css:
+  .header-cover {
+    background-image: linear-gradient(0deg, rgba($cover_color$,0), rgba($cover_color$,1)), url($project_cover$);
+    background-size: contain, cover;
+    background-position: left top, center center;
+  }
+header.archive-project.whp-2017.header-cover
   .title
     h1
       a href="/ru/2016/"

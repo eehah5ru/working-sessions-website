@@ -19,6 +19,7 @@ nav#menu.whp-2017 {
 header.index-page.whp-2017 {
   @include lang-switch;
   @include whp-2017-header;
+  @include whp-2017-gradient-background;
 }
 
 section.whp-2017.index-page.description {
