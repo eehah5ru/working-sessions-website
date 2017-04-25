@@ -199,13 +199,18 @@ archivePagesRules =
                     >>= loadAndApplyTemplate ruIndexTemplate defaultContext
         enRules = ruRules
 
+
 archiveIndexPageRules =
   matchMultiLang ruRules enRules "2016/archive.slim"
   where ruRules = slimPageRules $ \x ->
                     do pTpl <- loadBody "templates/archive-item.slim"
+                       plTpl <- loadBody "templates/archive-projects-list-item.slim"
                        projects <- loadAll "ru/2016/archive/*.slim"
+                       projects2 <- return . take 100 . cycle $ projects
                        s <- applyTemplateList pTpl defaultContext projects
+                       s2 <- applyTemplateList plTpl defaultContext projects2
                        let archiveCtx = constField "projects" s `mappend`
+                                        constField "projects_list" s2 `mappend`
                                         defaultContext
                        applyAsTemplate archiveCtx x
                          >>= loadAndApplyTemplate "templates/default.slim" archiveCtx
