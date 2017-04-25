@@ -8,7 +8,7 @@
   font-size: 12vw;
   line-height: 1;
   padding-left: 6vw;
-  color: blue;
+  color: darken(grey, 5%);
   top: 0;
   right: 0;
   position: absolute;
@@ -20,7 +20,7 @@
 
 
   &:hover {
-    color: red;
+    color: blue;
     text-decoration: underline;
   }
 
