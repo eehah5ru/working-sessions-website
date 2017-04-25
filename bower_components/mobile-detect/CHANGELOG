@@ -1,3 +1,28 @@
+v1.3.6:
+  date: 2017-04-05
+  changes:
+    - use Mobile-Detect@2.8.25
+
+v1.3.5:
+  date: 2016-11-14
+  changes:
+    - use Mobile-Detect@2.8.24
+    - fix #46 (typings for TypeScript, thanks to @mgroenhoff)
+
+v1.3.4:
+  date: 2016-11-11
+  changes:
+    - use Mobile-Detect@2.8.23
+    - add typings for TypeScript
+
+v1.3.3:
+  date: 2016-07-31
+  changes:
+    - use Mobile-Detect@2.8.22
+    - update dev dependencies (no impact on code)
+    - add licence to source
+    - add runtime version info
+
 v1.3.2:
   date: 2016-03-31
   changes:
