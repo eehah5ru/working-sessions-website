@@ -191,7 +191,7 @@
   var showMenu = function() {
     // console.log("showing menu - begin: ", isMenuVisible);
     $("#menu").show();
-    $("body").removeClass("disabled-scroll");
+    $("body").addClass("disabled-scroll");
     isMenuVisible = true;
     // console.log("showing menu - end: ", isMenuVisible);
   };
@@ -199,7 +199,7 @@
   var hideMenu = function() {
     // console.log("hiding menu - begin: ", isMenuVisible);
     $("#menu").hide();
-    $("body").addClass("disabled-scroll");
+    $("body").removeClass("disabled-scroll");
     isMenuVisible = false;
     // console.log("hiding menu - end: ", isMenuVisible);
   };
