@@ -45,24 +45,30 @@ $primary-color-2017: darken(blue, 10%);
   color: blue;
   cursor: pointer;
   line-height: 1;
-  font-size: 20vw;
 
   margin-left: 1vw;
+  margin-top: 1vw;
 
-  &:hover {
-    color: red;
-    text-decoration: underline;
+  svg {
+    height: 20vw;
 
+    @include breakpoint(440) {
+      height: 15vw;
+    }
+
+    @include breakpoint(large) {
+      height: 10vw;
+    }
+
+    path {
+      fill: blue;
+
+      &:hover {
+        fill: red;
+      }
+
+    }
   }
-
-  @include breakpoint(440) {
-    font-size: 15vw;
-  }
-
-  @include breakpoint(large) {
-    font-size: 10vw;
-  }
-
 }
 
 @mixin menu {
