@@ -14,7 +14,7 @@ slimPageRules f =
      route $ setExtension "html"
      compile $ slimCompiler
        >>= f
-       >>= relativizeUrls
+       -- >>= relativizeUrls
 
 
 withSlimDeps rules =
