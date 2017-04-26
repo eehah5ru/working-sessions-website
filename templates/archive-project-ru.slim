@@ -1,0 +1,23 @@
+css:
+  .header-cover {
+    background-image: linear-gradient(0deg, rgba($cover_color$,0), rgba($cover_color$,1)), url($project_cover$);
+    background-size: contain, cover;
+    background-position: left top, center center;
+  }
+header.archive-project.whp-2017
+  .header-cover
+    | &nbsp;
+  .title
+    h1
+      a href="/ru/2016/"
+        | 2016
+      | &nbsp;->&nbsp;
+      a href="/ru/2016/archive.html"
+        | Архив
+    h1
+      | $author$
+    h1
+      | $project_title$
+
+article.archive-project.whp-2017
+  | $body$
