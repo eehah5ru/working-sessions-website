@@ -22,12 +22,18 @@ enUrlField :: Context String
 enUrlField = multiLangUrlField "en" "ru"
 
 multiLangUrlField :: String -> String -> Context String
-multiLangUrlField lang fromLang = field fieldName (\x -> getUrl fromLang x >>= return . translateUrl fromLang lang >>= return . (++) "/")
-  where fieldName = lang ++ "_url"
+multiLangUrlField lang fromLang = field fieldName (\x -> getUrl fromLang x >>= return . translateUrl fromLang lang >>= fallbackToNotFound lang >>= return . (++) "/")
+  where notFoundPage :: String -> String
+        notFoundPage lang = (lang ++ "/2017/404.html")
+
+        fieldName = lang ++ "_url"
+
         getUrl :: String -> Item a -> Compiler String
         getUrl langPrefix i = return (itemIdentifier i)
           >>= getRoute
-          >>= return . maybe ("/" ++ langPrefix ++ "/404.html") id
+          >>= return . maybe (notFoundPage langPrefix) id
 
         translateUrl :: String -> String -> String -> String
         translateUrl fromLang toLang = replaceAll (fromLang ++ "/") (const (toLang ++ "/"))
+        fallbackToNotFound :: String -> String -> Compiler String
+        fallbackToNotFound lang u = return u >>= return . fromFilePath >>= getRoute >>= return . maybe (notFoundPage lang) id
