@@ -189,15 +189,19 @@
   var isMenuVisible = false;
 
   var showMenu = function() {
-    $("#menu").hide();
+    // console.log("showing menu - begin: ", isMenuVisible);
+    $("#menu").show();
     $("body").removeClass("disabled-scroll");
     isMenuVisible = true;
+    // console.log("showing menu - end: ", isMenuVisible);
   };
 
   var hideMenu = function() {
-    $("#menu").show();
+    // console.log("hiding menu - begin: ", isMenuVisible);
+    $("#menu").hide();
     $("body").addClass("disabled-scroll");
     isMenuVisible = false;
+    // console.log("hiding menu - end: ", isMenuVisible);
   };
 
   var toggleMenu = function() {
