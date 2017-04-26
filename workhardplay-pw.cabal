@@ -15,5 +15,6 @@ executable site
                   , bytestring
                   , string-conversions
                   , filepath
+                  , MissingH
   ghc-options:      -threaded
   default-language: Haskell2010

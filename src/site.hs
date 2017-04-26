@@ -177,8 +177,10 @@ staticPagesRules =
     -- indexPage "2016/archive.slim"
   where
     indexPage = matchMultiLang ruRules enRules
-    ruRules = slimPageRules $ loadAndApplyTemplate "templates/default.slim" defaultContext
-    enRules = slimPageRules $ loadAndApplyTemplate enIndexTemplate defaultContext
+    ruRules = slimPageRules $ (\x -> return x
+                                >>= applyAsTemplate siteCtx
+                                >>= loadAndApplyTemplate "templates/default.slim" siteCtx)
+    enRules = ruRules
 
     -- readSlimTemplate :: Identifier -> Compiler (Template)
     -- readSlimTemplate p =
@@ -194,9 +196,9 @@ archivePagesRules =
   where rules = matchMultiLang ruRules enRules
         ruRules = slimPageRules $ \x ->
                     return x
-                    >>= applyAsTemplate defaultContext
-                    >>= loadAndApplyTemplate "templates/archive-project.slim" defaultContext
-                    >>= loadAndApplyTemplate ruIndexTemplate defaultContext
+                    >>= applyAsTemplate siteCtx
+                    >>= loadAndApplyTemplate "templates/archive-project.slim" siteCtx
+                    >>= loadAndApplyTemplate ruIndexTemplate siteCtx
         enRules = ruRules
 
 
@@ -207,15 +209,14 @@ archiveIndexPageRules =
                        plTpl <- loadBody "templates/archive-projects-list-item.slim"
                        projects <- loadAll "ru/2016/archive/*.slim"
                        projects2 <- return . take 100 . cycle $ projects
-                       s <- applyTemplateList pTpl defaultContext projects
-                       s2 <- applyTemplateList plTpl defaultContext projects2
+                       s <- applyTemplateList pTpl siteCtx projects
+                       s2 <- applyTemplateList plTpl siteCtx projects2
                        let archiveCtx = constField "projects" s `mappend`
                                         constField "projects_list" s2 `mappend`
-                                        defaultContext
+                                        siteCtx
                        applyAsTemplate archiveCtx x
                          >>= loadAndApplyTemplate "templates/default.slim" archiveCtx
-        enRules = slimPageRules $
-                    loadAndApplyTemplate enIndexTemplate defaultContext
+        enRules = ruRules
 
 -- doIndexPageRules indexPage indexTemplate =
 --   match (fromList [indexPage]) $
@@ -282,6 +283,10 @@ coffee = getResourceString >>= withItemBody processCoffee
 --
 -- contexts
 --
+
+siteCtx = ruUrlField `mappend`
+          enUrlField `mappend`
+          defaultContext
 --
 -- postCtx :: Context String
 -- postCtx = dateField "date" "%B %e, %Y" `mappend` defaultContext
