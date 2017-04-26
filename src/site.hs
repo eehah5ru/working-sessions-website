@@ -171,6 +171,7 @@ staticPagesRules =
     -- 2017
     indexPage "2017/index.slim"
     indexPage "2017/invitation.slim"
+    indexPage "2017/404.slim"
 
     -- 2016
     indexPage "2016/index.slim"
