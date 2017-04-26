@@ -85,6 +85,22 @@ $primary-color-2017: darken(blue, 10%);
 
   // perspective: 0px;
 
+  .email {
+    position: absolute;
+    right: rem-calc(20px);
+    bottom: rem-calc(20px);
+
+
+    a {
+      color: lighten(grey, 20%);
+
+      &:hover {
+        text-decoration: underline;
+        color: blue;
+      }
+    }
+  }
+
   .menu-items {
     @include vertical-center;
     width: 100%;
