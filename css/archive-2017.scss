@@ -13,6 +13,11 @@ header.archive-page.whp-2017 {
     left: 0;
     width: 120%;
 
+    color: lighten(grey, 20%);
+
+    span:before {
+      content: "  ->  "
+    }
     a {
       color: lighten(grey, 20%);
 
@@ -60,7 +65,7 @@ article.archive-page.whp-2017 {
       @extend .row;
       @extend .expanded;
       word-wrap: break-word;
-      word-break: break-all;
+      word-break: break-word;
 
       margin-bottom: 4rem;
 
