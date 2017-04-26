@@ -22,7 +22,7 @@ enUrlField :: Context String
 enUrlField = multiLangUrlField "en" "ru"
 
 multiLangUrlField :: String -> String -> Context String
-multiLangUrlField lang fromLang = field fieldName (\x -> getUrl fromLang x >>= return . translateUrl fromLang lang >>= fallbackToNotFound lang >>= return . (++) "/")
+multiLangUrlField lang fromLang = field fieldName (\x -> getUrl fromLang x >>= return . translateUrl fromLang lang >>= return . (++) "/")
   where notFoundPage :: String -> String
         notFoundPage lang = (lang ++ "/2017/404.html")
 
@@ -30,10 +30,16 @@ multiLangUrlField lang fromLang = field fieldName (\x -> getUrl fromLang x >>= r
 
         getUrl :: String -> Item a -> Compiler String
         getUrl langPrefix i = return (itemIdentifier i)
+          -- >>= (load :: Identifier -> Compiler (Item String))
+          -- >>= return . itemIdentifier
           >>= getRoute
           >>= return . maybe (notFoundPage langPrefix) id
 
         translateUrl :: String -> String -> String -> String
         translateUrl fromLang toLang = replaceAll (fromLang ++ "/") (const (toLang ++ "/"))
         fallbackToNotFound :: String -> String -> Compiler String
-        fallbackToNotFound lang u = return u >>= return . fromFilePath >>= getRoute >>= return . maybe (notFoundPage lang) id
+        fallbackToNotFound lang u =
+          do debugCompiler ("MultiLang-before: " ++ u)
+             fallbackUrl <- return u >>= return . fromFilePath >>= getRoute >>= return . maybe (notFoundPage lang) id
+             debugCompiler ("MultiLang-after: " ++ fallbackUrl)
+             return fallbackUrl
