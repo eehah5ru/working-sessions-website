@@ -30,7 +30,7 @@
 # For available Capistrano configuration variables see the documentation page.
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
-
+set :deploy_to, "/var/www/workhardplay-staging"
 
 
 # Custom SSH Options
@@ -50,14 +50,14 @@
 # The server-based syntax can be used to override options:
 # ------------------------------------
 server "deploy.do.myfutures.trade",
-  user: "deploy",
-  roles: %w{web app},
-  ssh_options: {
-    config: true,
-    # verbose: :debug,
-    # user: "user_name", # overrides user setting above
-    keys: %w(~/.ssh/id_rsa),
-    forward_agent: true,
-    auth_methods: %w(publickey password)
-    # password: "please use keys"
-  }
+       user: "deploy",
+       roles: %w{web app},
+       ssh_options: {
+         config: true,
+         # verbose: :debug,
+         # user: "user_name", # overrides user setting above
+         keys: %w(~/.ssh/id_rsa),
+         forward_agent: true,
+         auth_methods: %w(publickey password)
+         # password: "please use keys"
+       }
