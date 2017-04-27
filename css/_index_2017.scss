@@ -30,5 +30,19 @@ section.whp-2017.index-page.description {
     @extend .large-6;
     @extend .large-offset-3;
     @extend .end;
+
+    a {
+      text-transform: none;
+      text-decoration: underline;
+      color: $primary-color-2017;
+
+      &:hover {
+        color: red;
+      }
+    }
+
+    &.hidden-text {
+      color: lighten(grey, 47%);
+    }
   }
 }
