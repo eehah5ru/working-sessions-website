@@ -31,6 +31,7 @@
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
 
+set :deploy_to, "/var/www/workhardplay-production",
 
 
 # Custom SSH Options
@@ -59,3 +60,15 @@
 #     auth_methods: %w(publickey password)
 #     # password: "please use keys"
 #   }
+server "deploy.do.myfutures.trade",
+       user: "deploy",
+       roles: %w{web app},
+       ssh_options: {
+         config: true,
+         # verbose: :debug,
+         # user: "user_name", # overrides user setting above
+         keys: %w(~/.ssh/id_rsa),
+         forward_agent: true,
+         auth_methods: %w(publickey password)
+         # password: "please use keys"
+       }
