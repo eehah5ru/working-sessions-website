@@ -173,7 +173,11 @@ $primary-color-2017: darken(blue, 10%);
   }
 
   h1 {
-    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    // width: 100%;
     color: lighten(grey, 5%);
     // color: linear-gradient(0deg, white, grey);
     font-size: 8vw;
@@ -181,8 +185,8 @@ $primary-color-2017: darken(blue, 10%);
     // background: linear-gradient(45deg, white, grey);;
     // -webkit-background-clip: text;
     // -webkit-text-fill-color: transparent;
-    transform-origin: 50% 50%;
-    transform: rotateY(45deg) rotateZ(10deg); // translateY(2vh);
+    transform-origin: 0 0 0;
+    transform: rotateY(45deg) rotateZ(10deg) translate(-50%, -50%);
 
     &.large {
       font-size: 12vw;
